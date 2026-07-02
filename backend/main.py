@@ -18,7 +18,7 @@ app.add_middleware(
 )
 
 _BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
-model = load_model(os.path.join(_BACKEND_DIR, "modelo_vegetales_cnn.pth"))
+model = load_model(os.path.join(_BACKEND_DIR, "modelo_vegetales.pth"))
 
 
 @app.post("/predict")
