@@ -2,11 +2,12 @@ import io
 import os
 import torch
 from PIL import Image
-from torchvision.transforms import ToTensor
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from model import load_model, transform, DEVICE
 from classes import CLASSES
+
+CONFIDENCE_THRESHOLD = 0.5
 
 app = FastAPI(title="Vegetables MLP API")
 
@@ -32,6 +33,13 @@ async def predict(file: UploadFile = File(...)):
         probs = torch.nn.functional.softmax(output, dim=1)[0]
         predicted_idx = output.argmax(dim=1).item()
         confidence = probs[predicted_idx].item()
+
+    if confidence < CONFIDENCE_THRESHOLD:
+        return {
+            "class": "No reconocido",
+            "confidence": round(confidence, 4),
+            "message": "La imagen no pertenece a ninguna clase conocida",
+        }
 
     return {
         "class": CLASSES[predicted_idx],

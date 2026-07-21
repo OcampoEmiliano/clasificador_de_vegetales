@@ -6,9 +6,9 @@ NUM_CLASSES = 15
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class_names = [
-    "Bean", "Bitter_Gourd", "Bottle_Gourd", "Brinjal", "Broccoli",
-    "Cabbage", "Capsicum", "Carrot", "Cauliflower", "Cucumber",
-    "Papaya", "Potato", "Pumpkin", "Radish", "Tomato",
+    "Frijol", "Calabaza Amarga", "Calabaza de Botella", "Berenjena", "Brócoli",
+    "Repollo", "Pimiento", "Zanahoria", "Coliflor", "Pepino",
+    "Papaya", "Papa", "Calabaza", "Rábano", "Tomate",
 ]
 
 transform = transforms.Compose([
